@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from "react";  
+import { BrowserRouter as Router, useLocation, useNavigate } from "react-router-dom";
 
 const CustomerOnboarding = () => {
   const [formData, setFormData] = useState({
@@ -21,13 +22,20 @@ const CustomerOnboarding = () => {
     backgroundColor: "#f9f9f9",
   };
 
+  const buttonStyleFlex={
+    display: "flex",
+    justifyContent: "space-between",
+    gap:"2rem"
+
+  }
   const labelStyle = {
     display: "block",
     marginBottom: "5px",
-    fontWeight: "bold",
+    fontWeight: "normal",
   };
 
   const inputStyle = {
+    boxSizing: "border-box",
     width: "100%",
     padding: "8px",
     marginBottom: "10px",
@@ -36,7 +44,7 @@ const CustomerOnboarding = () => {
   };
 
   const buttonStyle = {
-    backgroundColor: "#28a745",
+    backgroundColor: "black",
     color: "white",
     padding: "10px 15px",
     border: "none",
@@ -51,7 +59,21 @@ const CustomerOnboarding = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
+  const navigate = useNavigate();
 
+  const handleClear = () => {
+    setFormData({
+      companyName: "",
+      address: "",
+      pointOfContact: "",
+      state: "",
+      phoneNumber: "",
+      emailId: "",
+      gstNumber: "",
+      rateCard: "",
+    });
+  };
+  
   // Form Validation
   const validateForm = () => {
     const alphaNumericRegex = /^[a-zA-Z0-9 ]+$/;
@@ -85,6 +107,9 @@ const CustomerOnboarding = () => {
       alert("Customer Onboarded Successfully!");
     }
   };
+  const handleContinue = () => {
+    navigate("/customer-confirm", { state: { formData } });
+  };
 
   return (
     <div style={containerStyle}>
@@ -106,11 +131,7 @@ const CustomerOnboarding = () => {
           <input type="text" style={inputStyle} name="pointOfContact" value={formData.pointOfContact} onChange={handleChange} required />
         </div>
 
-        <div>
-          <label style={labelStyle}>State:</label>
-          <input type="text" style={inputStyle} name="state" value={formData.state} onChange={handleChange} required />
-        </div>
-
+       
         <div>
           <label style={labelStyle}>Phone Number:</label>
           <input type="text" style={inputStyle} name="phoneNumber" value={formData.phoneNumber} onChange={handleChange} required />
@@ -131,9 +152,14 @@ const CustomerOnboarding = () => {
           <input type="text" style={inputStyle} name="rateCard" value={formData.rateCard} onChange={handleChange} required />
         </div>
 
-        <button type="submit" style={buttonStyle}>
-          Submit
+<div style={buttonStyleFlex}>
+        <button type="button" style={buttonStyle} onClick={handleContinue} >
+          Continue
         </button>
+        <button type="button" style={buttonStyle} onClick={handleClear}>
+          Clear
+        </button>
+        </div>
       </form>
     </div>
   );

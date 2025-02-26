@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from "react";  
+import { BrowserRouter as Router, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 import './styles/VehicleOnboarding.css'
 const VehicleOnboardingForm = () => {
@@ -47,23 +48,23 @@ const labelStyle = {
 
   marginBottom: "5px",
 
-  fontWeight: "bold",
+  fontWeight: "normal",
 };
 
 const inputStyle = {
   width: "100%",
-
+  boxSizing: "border-box",
   padding: "8px",
 
   marginBottom: "10px",
 
   border: "1px solid #ccc",
-
+  boxSizing: "border-box",
   borderRadius: "4px",
 };
 
 const buttonStyle = {
-  backgroundColor: "#28a745",
+  backgroundColor: "black",
 
   color: "white",
 
@@ -77,7 +78,13 @@ const buttonStyle = {
 
   width: "100%",
 };
+const buttonStyleFlex={
+  display: "flex",
+  justifyContent: "space-between",
+  gap:"2rem"
 
+}
+  const navigate = useNavigate();
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -88,6 +95,9 @@ const buttonStyle = {
     if (name === "nationalPermit" && value === "No") {
       setFormData({ ...formData, permitUpto: "" });
     }
+  };
+  const handleContinue = () => {
+    navigate("/vehicle-confirm", { state: { formData } });
   };
 
   // Form Validation
@@ -109,6 +119,24 @@ const buttonStyle = {
     }
     return true;
   };
+  const handleClear = () => {
+    setFormData({
+      vehicleNumber: "",
+      registerName: "",
+      vehicleType: "",
+      grossVehicleWeight: "",
+      registrationDate: "",
+      fitnessValidUpto: "",
+      taxValidUpto: "",
+      insuranceValidUpto: "",
+      pollutionValidUpto: "",
+      statePermitValidUpto: "",
+      nationalPermit: "No",
+      permitUpto: "",
+      remarks: "",
+    });
+  };
+  
 
   // Handle Form Submission
   const handleSubmit = (e) => {
@@ -201,9 +229,14 @@ const buttonStyle = {
           <textarea name="remarks"  style={inputStyle} value={formData.remarks} onChange={handleChange} className="w-full p-2 border rounded"></textarea>
         </div>
 
-        <button type="submit"  style={inputStyle} className="w-full bg-blue-600 text-white p-2 rounded font-semibold hover:bg-blue-700">
-          Submit
+        <div style={buttonStyleFlex}>
+        <button type="button" style={buttonStyle} onClick={handleClear}>
+          Clear
         </button>
+        <button type="button" style={buttonStyle} onClick={handleContinue} >
+          Continue
+        </button>
+        </div>
       </form>
     </div>
   );

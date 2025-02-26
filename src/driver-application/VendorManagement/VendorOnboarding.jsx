@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState } from "react";  
+import { BrowserRouter as Router, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const VendorOnboarding = () => {
@@ -21,7 +22,7 @@ const VendorOnboarding = () => {
     IFSCcode: "",
     branchName: "",
   });
-
+  const navigate = useNavigate();
   const containerStyle = {
     maxWidth: "800px",
     margin: "auto",
@@ -30,10 +31,16 @@ const VendorOnboarding = () => {
     borderRadius: "8px",
     backgroundColor: "#f9f9f9",
   };
+  const buttonStyleFlex={
+    display: "flex",
+    justifyContent: "space-between",
+    gap:"2rem"
 
-  const labelStyle = { display: "block", marginBottom: "5px", fontWeight: "bold" };
-  const inputStyle = { width: "100%", padding: "8px", marginBottom: "10px", border: "1px solid #ccc", borderRadius: "4px" };
-  const buttonStyle = { backgroundColor: "#28a745", color: "white", padding: "10px", border: "none", borderRadius: "5px", cursor: "pointer", width: "100%" };
+  }
+
+  const labelStyle = { display: "block", marginBottom: "5px", fontWeight: "normal" };
+  const inputStyle = { width: "100%", boxSizing: "border-box", padding: "8px", marginBottom: "10px", border: "1px solid #ccc", borderRadius: "4px" };
+  const buttonStyle = { backgroundColor: "black", color: "white", padding: "10px", border: "none", borderRadius: "5px", cursor: "pointer", width: "100%" };
 
   // Handle Input Changes
   const handleChange = (e) => {
@@ -72,6 +79,31 @@ const VendorOnboarding = () => {
     }
     return true;
   };
+  const handleContinue = () => {
+    navigate("/vendor-confirm", { state: { formData } });
+  };
+  const handleClear = () => {
+    setFormData({
+      supplierName: "",
+      venderSiteCode: "",
+      phoneNumber: "",
+      addressLine1: "",
+      addressLine2: "",
+      townCity: "",
+      state: "",
+      pinCode: "",
+      emailId: "",
+      serviceRegistrationNumber: "",
+      serviceTax: "",
+      panNumber: "",
+      tdsRateSection: "",
+      beneficiaryName: "",
+      accountNumber: "",
+      IFSCcode: "",
+      branchName: "",
+    });
+  };
+  
 
   // Handle Form Submission
   const handleSubmit = (e) => {
@@ -145,9 +177,30 @@ const VendorOnboarding = () => {
         </div>
 
         <div>
+          <label style={labelStyle}>Service Registration Number(GST):</label>
+          <input type="text" style={inputStyle} name="serviceRegistrationNumber" value={formData.serviceRegistrationNumber} onChange={handleChange} required />
+        </div>
+        <div>
+          <label style={labelStyle}>Sevice tax rate if any:</label>
+          <input type="email" style={inputStyle} name="serviceTax" value={formData.serviceTax} onChange={handleChange} required />
+        </div>        
+        <div>
           <label style={labelStyle}>PAN Number:</label>
           <input type="text" style={inputStyle} name="panNumber" value={formData.panNumber} onChange={handleChange} required />
         </div>
+        <div>
+          <label style={labelStyle}>TDS rate & Section if any:</label>
+          <input type="text" style={inputStyle} name="tdsRateSection" value={formData.tdsRateSection} onChange={handleChange} required />
+        </div>
+        <div>
+          <label style={labelStyle}>Beneficiary_Name (Mention on Cheque or Pass book):</label>
+          <input type="text" style={inputStyle} name="beneficiaryName" value={formData.beneficiaryName} onChange={handleChange} required />
+        </div>
+        <div>
+          <label style={labelStyle}>A/c Number:</label>
+          <input type="text" style={inputStyle} name="accountNumber" value={formData.accountNumber} onChange={handleChange} required />
+        </div>
+        
 
         <div>
           <label style={labelStyle}>IFSC Code:</label>
@@ -159,7 +212,14 @@ const VendorOnboarding = () => {
           <input type="text" style={inputStyle} name="branchName" value={formData.branchName} onChange={handleChange} required />
         </div>
 
-        <button type="submit" style={buttonStyle}>Submit</button>
+        <div style={buttonStyleFlex}>
+        <button type="button" style={buttonStyle} onClick={handleContinue} >
+          Continue
+        </button>
+        <button type="button" style={buttonStyle} onClick={handleClear}>
+          Clear
+        </button>
+        </div>
       </form>
     </div>
   );

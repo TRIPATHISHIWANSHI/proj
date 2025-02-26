@@ -6,7 +6,7 @@ import VehicleOnboarding from "./driver-application/VehicleManagement/VehicleOnb
 import LiveFleetTracking from "./driver-application/VehicleManagement/LiveFleetTracking";
 import OilService from "./driver-application/VehicleManagement/OilService";
 import SpareParts from "./driver-application/VehicleManagement/SpareParts";
-import VehicleType from "./driver-application/VehicleManagement/VehicleType";
+import VehicleType from "./driver-application/VehicleManagement/VehicleTyre.jsx";
 import DriverManagement from "./driver-application/DriverManagement/DriverManagement";
 import DriverOnboarding from "./driver-application/DriverManagement/DriverOnboarding.jsx";
 import ExpensesManagement from "./driver-application/ExpenseManagement/ExpensesManagement";
@@ -25,10 +25,18 @@ import Invoice from "./driver-application/CustomerManagement/Invoice.jsx";
 import PaymentStatus from "./driver-application/CustomerManagement/PaymentStatus.jsx";
 import CustomerOnboarding from "./driver-application/CustomerManagement/CustomerOnboarding.jsx";
 import MIS from "./driver-application/CustomerManagement/MIS";
+import Dashboard from "./Components/Dashboard.jsx";
+import Sidebar from "./Components/Sidebar.jsx";
+import CustomerConfirmation from "./driver-application/CustomerManagement/CustomerConfirmation.jsx";  // Adjust the path if needed
+import VehicleConfirmation from "./driver-application/VehicleManagement/VehicleConfirmation.jsx";
+import DriverConfirmation from "./driver-application/DriverManagement/DriverConfirmation.jsx";
+import VendorConfirmation from "./driver-application/VendorManagement/VendorConfirmation.jsx";
 
 const App = () => {
   return (
     <Router>
+     {/* <Dashboard/> */}
+     <Sidebar/>
       <Navbar />
       <Routes>
         {/* Vehicle Management Routes */}
@@ -38,10 +46,12 @@ const App = () => {
         <Route path="/oil-service" element={<OilService />} />
         <Route path="/spare-parts" element={<SpareParts />} />
         <Route path="/vehicle-type" element={<VehicleType />} />
+        <Route path="/vehicle-confirm" element={<VehicleConfirmation/>} />
 
         {/* Driver Management Routes */}
         <Route path="/driver-management" element={<DriverManagement />} />
         <Route path="/driver-onboarding" element={<DriverOnboarding />} />
+        <Route path="/driver-confirm" element={<DriverConfirmation />} />
 
         {/* Expense Management Routes */}
         <Route path="/expenses-management" element={<ExpensesManagement />} />
@@ -55,6 +65,7 @@ const App = () => {
         <Route path="/deduction" element={<Deduction />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/trip-sheet" element={<TripSheet />} />
+        <Route path="/vendor-confirm" element={<VendorConfirmation/>} />
 
         {/* Customer Management */}
         <Route path="/customer-management" element={<CustomerManagement />} />
@@ -64,6 +75,7 @@ const App = () => {
         <Route path="/invoice" element={<Invoice/>} />
         <Route path="/mis" element={<MIS />} />
         <Route path="/payment-status" element={<PaymentStatus/>} />
+        <Route path="/customer-confirm" element={<CustomerConfirmation />} />
       </Routes>
     </Router>
   );

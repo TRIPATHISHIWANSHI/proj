@@ -1,7 +1,5 @@
-// Driver Onboarding
-
-import React, { useState } from "react";
-
+import React, { useState } from "react";  
+import { BrowserRouter as Router, useLocation, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const containerStyle = {
@@ -33,12 +31,12 @@ const labelStyle = {
 
   marginBottom: "5px",
 
-  fontWeight: "bold",
+  fontWeight: "normal",
 };
 
 const inputStyle = {
   width: "100%",
-
+  boxSizing: "border-box",
   padding: "8px",
 
   marginBottom: "10px",
@@ -47,9 +45,14 @@ const inputStyle = {
 
   borderRadius: "4px",
 };
+const buttonStyleFlex={
+  display: "flex",
+  justifyContent: "space-between",
+  gap:"2rem"
 
+}
 const buttonStyle = {
-  backgroundColor: "#28a745",
+  backgroundColor: "black",
 
   color: "white",
 
@@ -106,12 +109,41 @@ const DriverOnboarding = () => {
 
     emergencyContact: "",
   });
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
 
     setFormData({ ...formData, [name]: value });
   };
+  const handleContinue = () => {
+    navigate("/driver-confirm", { state: { formData } });
+  };
+  const handleClear = () => {
+    setFormData({
+      driverId: "AUTO_GENERATED",
+      firstName: "",
+      secondName: "",
+      surname: "",
+      fatherName: "",
+      address: "",
+      dob: "",
+      dlNumber: "",
+      dlValidTill: "",
+      dlType: "LMV",
+      joiningDate: "",
+      basicPayment: "",
+      nameAsPerBank: "",
+      bankAccountNumber: "",
+      ifsc: "",
+      bankName: "",
+      panNo: "",
+      aadharNumber: "",
+      contactNumber: "",
+      emergencyContact: "",
+    });
+  };
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -261,9 +293,14 @@ const DriverOnboarding = () => {
             required
           />
         </fieldset>
-        <button type="submit" style={buttonStyle}>
-          Submit
+        <div style={buttonStyleFlex}>
+        <button type="button" style={buttonStyle} onClick={handleContinue} >
+          Continue
         </button>
+        <button type="button" style={buttonStyle} onClick={handleClear}>
+          Clear
+        </button>
+        </div>
       </form>
     </div>
   );

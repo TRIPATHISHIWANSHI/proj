@@ -1,8 +1,9 @@
+
 .nav-bar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #ffffff;
+  background-color: #111111;
   padding: 10px 20px;
   border-bottom: 1px solid #ccc;
   height: 120px;
@@ -10,6 +11,8 @@
 
 .logo {
   height: 64px;
+  width: auto;
+  background-color: white;
 }
 
 .logo img {
@@ -23,8 +26,6 @@
   padding: 8px 16px;
   position: relative;
   height: 64px;
- 
-  
 }
 
 .nav-links a, .dropdown > button {
@@ -36,6 +37,16 @@
   font-size: 16px;
   padding: 10px 15px;
   position: relative;
+}
+.nav-links{
+  display: flex;
+  gap: 2rem;
+  button{
+    background-color: #ffcc00;
+    height: 64px;
+    border-radius: 0.84rem;
+  }
+  
 }
 
 .nav-links a:hover, .dropdown > button:hover {
@@ -89,4 +100,56 @@
 /* Show dropdown on hover */
 .dropdown:hover .dropdown-menu {
   display: flex;
+}
+.menu-toggle {
+  display: none;
+ 
+}
+
+
+
+/* Responsive Navbar */
+@media screen and (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+    background-color: rgb(0, 0, 0);
+    width: 2rem;
+    text-align: center;
+    padding: 0.2rem 0.2rem;
+    font-size: 2rem;
+    height: 2.5rem;
+    color: white;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 8rem;
+    left: 0;
+    width: 100%;
+    background-color: rgb(0, 0, 0);
+   
+    height: auto;
+    button{
+      background-color: #ffcc00;
+      width: 90vw;
+    }
+  }
+
+  .nav-links.open {
+    display: flex;
+  }
+
+  .dropdown-menu {
+    position: relative;
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .dropdown.open .dropdown-menu {
+    display: flex;
+  }
+  
 }
