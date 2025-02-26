@@ -33,9 +33,10 @@ import DriverConfirmation from "./driver-application/DriverManagement/DriverConf
 import VendorConfirmation from "./driver-application/VendorManagement/VendorConfirmation.jsx";
 
 const App = () => {
+  
   return (
     <Router>
-     {/* <Dashboard/> */}
+    
      <Sidebar/>
       <Navbar />
       <Routes>

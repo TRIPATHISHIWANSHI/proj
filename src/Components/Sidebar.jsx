@@ -12,45 +12,48 @@ const Sidebar = ({ isSidebarOpen, toggleSidebar }) => {
     return () => window.removeEventListener("resize", checkScreenSize);
   }, []);
 
-
   return (
     <div style={{ position: "relative" }}>
-      {/* Sidebar */}
-      {isSidebarOpen && (
-        <div
-          style={{
-            ...styles.sidebar,
-            ...(isSmallScreen ? styles.smallScreenSidebar : {}),
-          }}
-        >
-<h3 style={styles.header}>Dashboard</h3>
-<ul style={styles.list}>
-<li style={styles.listItem} onClick={() => alert("Navigating to Home")}>Home</li>
-<li style={styles.listItem} onClick={() => alert("Navigating to Reports")}>Reports</li>
-</ul>
-<h3 style={styles.header}>CRM</h3>
-<ul style={styles.list}>
-<li style={styles.listItem}>Customer Management</li>
-<li style={styles.listItem}>Leads & Opportunities</li>
-<li style={styles.listItem}>Sales Tracking</li>
-</ul>
-<h3 style={styles.header}>Financial</h3>
-<ul style={styles.list}>
-<li style={styles.listItem}>Invoice Generation</li>
-<li style={styles.listItem}>Payslip Management</li>
-<li style={styles.listItem}>Expense Tracking</li>
-</ul>
-</div>)}
-</div>
-
+      <div
+        style={{
+          ...styles.sidebar,
+          ...(isSmallScreen ? styles.smallScreenSidebar : {}),
+        }}
+      >
+        <h3 style={styles.header}>Dashboard</h3>
+        <ul style={styles.list}>
+          <li
+            style={styles.listItem}
+            onClick={() => alert("Navigating to Home")}
+          >
+            Home
+          </li>
+          <li
+            style={styles.listItem}
+            onClick={() => alert("Navigating to Reports")}
+          >
+            Reports
+          </li>
+        </ul>
+        <h3 style={styles.header}>CRM</h3>
+        <ul style={styles.list}>
+          <li style={styles.listItem}>Customer Management</li>
+          <li style={styles.listItem}>Leads & Opportunities</li>
+          <li style={styles.listItem}>Sales Tracking</li>
+        </ul>
+        <h3 style={styles.header}>Financial</h3>
+        <ul style={styles.list}>
+          <li style={styles.listItem}>Invoice Generation</li>
+          <li style={styles.listItem}>Payslip Management</li>
+          <li style={styles.listItem}>Expense Tracking</li>
+        </ul>
+      </div>
+    </div>
   );
-
 };
- 
+
 const styles = {
-
   sidebar: {
-
     width: "250px",
 
     height: "100vh", // Adjust height considering the header
@@ -68,16 +71,14 @@ const styles = {
     overflowY: "auto",
 
     padding: "20px",
-    marginTop:"5rem"
-
+    marginTop: "5rem",
   },
   smallScreenSidebar: {
-    top: "0px", // Remove top margin
-    marginTop: "0", // Remove any extra space
+    top: "60px", // Remove top margin
+    marginTop: "60", // Remove any extra space
     height: "100vh", // Full height
   },
   header: {
-
     textAlign: "center",
 
     textTransform: "uppercase",
@@ -88,34 +89,21 @@ const styles = {
 
     padding: "20px",
 
-    marginBottom: "10px"
-
+    marginBottom: "10px",
   },
 
   list: {
-
     listStyle: "none",
 
-    padding: "0"
-
+    padding: "0",
   },
 
   listItem: {
-
-    borderBottom: "1px solid gray",
-
+    color: "white", // Ensure text is visible
     padding: "10px",
-
-    cursor: "pointer",
-
-    transition: "0.3s",
-
-    color: "white"
-
+    textDecoration: "none",
+    display: "block",
   },
-
 };
- 
-export default Sidebar;
 
- 
+export default Sidebar;
